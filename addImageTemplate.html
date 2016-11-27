@@ -1,5 +1,15 @@
 <template name="addImageTemplate">
   <input class="image-file-button form-control" id="image-file" type="file" {{atts}}/>
+  {{>progressBar}}
   <!-- <button type="button" class="btn btn-primary">Select an image</button> -->
   <!-- <input type="text" value="" {{atts}}/> -->
+</template>
+
+
+<template name="progressBar">
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+      <span class="sr-only">{{progress}}% Complete</span>
+    </div>
+  </div>
 </template>
