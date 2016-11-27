@@ -14,6 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.4.2.1');
   api.use('ecmascript');
   api.use('templating');
+  api.use('edgee:slingshot');
   api.use('aldeed:autoform@4.0.0 || 5.0.0');
   // api.mainModule('autoform-images.js');
   // api.addAssets(['addImageTemplate.html'], 'client');
