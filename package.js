@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'macsj200:autoform-images',
+  name: 'maxjohansen:autoform-images',
   version: '0.0.1',
   // Brief, one-line summary of the package.
-  summary: '',
+  summary: 'Image upload for Autoform',
   // URL to the Git repository containing the source code for this package.
   git: '',
   // By default, Meteor will default to using README.md for documentation.
@@ -13,8 +13,8 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.4.2.1');
   api.use('ecmascript');
-  api.use('templating');
-  api.use('edgee:slingshot');
+  api.use('templating@1.0.0');
+  api.use('edgee:slingshot@0.7.1');
   api.use('aldeed:autoform@4.0.0 || 5.0.0');
   // api.mainModule('autoform-images.js');
   // api.addAssets(['addImageTemplate.html'], 'client');
@@ -26,6 +26,6 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('macsj200:autoform-images');
-  api.mainModule('autoform-images-tests.js');
+  api.use('maxjohansen:autoform-images');
+  // api.mainModule('autoform-images-tests.js');
 });
