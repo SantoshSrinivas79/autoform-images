@@ -13,9 +13,9 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.4.2.1');
   api.use('ecmascript');
-  api.use('templating@1.0.0');
+  api.use('templating@1.2.15');
   api.use('edgee:slingshot@0.7.1');
-  api.use('aldeed:autoform@4.0.0 || 5.0.0');
+  api.use('aldeed:autoform@5.8.1');
   // api.mainModule('autoform-images.js');
   // api.addAssets(['addImageTemplate.html'], 'client');
   api.addFiles([
