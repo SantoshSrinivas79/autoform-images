@@ -1,15 +1,19 @@
 <template name="addImageTemplate">
-  <input class="image-file-button form-control" id="image-file" type="file" {{atts}}/>
-  {{>progressBar}}
+  <input class="image-file-button form-control" id="image-file" type="file" {{atts}} multiple/>
   <!-- <button type="button" class="btn btn-primary">Select an image</button> -->
   <!-- <input type="text" value="" {{atts}}/> -->
+  <ul class="filesList">
+  </ul>
 </template>
 
 
-<template name="progressBar">
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
-      <span class="sr-only">{{progress}}% Complete</span>
+<template name="uploadItem">
+  <li class="uploadItem">
+    <img src={{url}} class="thumbnail" style="width:200px;"/>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+        <span class="sr-only">{{progress}}% Complete</span>
+      </div>
     </div>
-  </div>
+  </li>
 </template>

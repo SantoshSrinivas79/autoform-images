@@ -1,52 +1,57 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
-
-const imageFile = new ReactiveVar();
-const imageURL = new ReactiveVar("");
-
-const uploader = new Slingshot.Upload("myFileUploads");
+import { Blaze } from 'meteor/blaze';
 
 AutoForm.addInputType('afImage', {
   template:'addImageTemplate',
   valueOut(){
-    console.log(imageURL.get());
-    return imageURL.get();
+    // TODO
+    // console.log(imageURL.get());
+    // return imageURL.get();
   },
 });
 
-deleteImage = () => {
-  if(imageURL.get() !== ""){
-    // TODO complete
-    // https://github.com/CulturalMe/meteor-slingshot/issues/50#issuecomment-80965314
-  }
-}
+Template.uploadItem.onCreated(function(){
+  this.uploader = new Slingshot.Upload("myFileUploads");
 
-Template.addImageTemplate.destroyed = function () {
-  deleteImage();
-};
+  this.uploader.send(this.data, function (error, downloadUrl) {
+    if (error) {
+      console.log(error);
+      // Log service detailed response.
+      // console.error('Error uploading', uploader.xhr.response);
+      // alert (error);
+    }
+    else {
+      console.log(downloadUrl);
+      // imageURL.set(downloadUrl);
+      // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
+    }
+  });
+});
 
 Template.addImageTemplate.events({
   'change .image-file-button'(event, target){
-    deleteImage();
-    imageFile.set(event.currentTarget.files[0]);
-    uploader.send(imageFile.get(), function (error, downloadUrl) {
-      if (error) {
-        console.log(error);
-        // Log service detailed response.
-        // console.error('Error uploading', uploader.xhr.response);
-        // alert (error);
-      }
-      else {
-        imageURL.set(downloadUrl);
-        // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
-      }
-    });
+    let uploadItems = $(".uploadItem");
+    for(let i = 0; i < uploadItems.length; i++){
+      const view = Blaze.getView(uploadItems[i]);
+      Blaze.remove(view);
+    }
+    const files = event.currentTarget.files;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      // TODO will break if we have multiple file lists (don't do that?)
+      Blaze.renderWithData(Template.uploadItem, file, $(".filesList")[0]);
+    }
   }
 });
 
-Template.progressBar.helpers({
+Template.uploadItem.helpers({
   progress: function () {
-    return Math.round(uploader.progress() * 100);
-  }
+    return Math.round(Template.instance().uploader.progress() * 100);
+  },
+  url: function(){
+    // TODO fix weird slash bug
+    return Template.instance().uploader.url(true);
+  },
 });
