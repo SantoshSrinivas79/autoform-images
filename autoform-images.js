@@ -3,12 +3,16 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Blaze } from 'meteor/blaze';
 
+let fileURLs = "";
+
 AutoForm.addInputType('afImage', {
   template:'addImageTemplate',
   valueOut(){
     // TODO
     // console.log(imageURL.get());
     // return imageURL.get();
+    console.log(fileURLs);
+    return fileURLs;
   },
 });
 
@@ -23,7 +27,7 @@ Template.uploadItem.onCreated(function(){
       // alert (error);
     }
     else {
-      console.log(downloadUrl);
+      fileURLs += ',' + downloadUrl;
       // imageURL.set(downloadUrl);
       // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
     }
@@ -37,6 +41,7 @@ const handleFiles = (files) => {
     const view = Blaze.getView(uploadItems[i]);
     Blaze.remove(view);
   }
+  fileURLs = "";
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
