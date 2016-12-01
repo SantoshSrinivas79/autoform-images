@@ -30,19 +30,33 @@ Template.uploadItem.onCreated(function(){
   });
 });
 
+const handleFiles = (files) => {
+  // Clear old entries
+  let uploadItems = $(".uploadItem");
+  for(let i = 0; i < uploadItems.length; i++){
+    const view = Blaze.getView(uploadItems[i]);
+    Blaze.remove(view);
+  }
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    // TODO will break if we have multiple file lists (don't do that?)
+    Blaze.renderWithData(Template.uploadItem, file, $(".filesList")[0]);
+  }
+};
+
 Template.addImageTemplate.events({
   'change .image-file-button'(event, target){
-    let uploadItems = $(".uploadItem");
-    for(let i = 0; i < uploadItems.length; i++){
-      const view = Blaze.getView(uploadItems[i]);
-      Blaze.remove(view);
-    }
-    const files = event.currentTarget.files;
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      // TODO will break if we have multiple file lists (don't do that?)
-      Blaze.renderWithData(Template.uploadItem, file, $(".filesList")[0]);
-    }
+    handleFiles(event.currentTarget.files);
+  },
+  'drag .filedrag, dragstart .filedrag, dragend .filedrag, dragover .filedrag, dragenter .filedrag, dragleave .filedrag'(event,target){
+    event.preventDefault();
+    event.stopPropagation();
+  },
+  'drop .filedrag'(event,target){
+    event.preventDefault();
+    event.stopPropagation();
+    handleFiles(event.originalEvent.dataTransfer.files);
   }
 });
 
