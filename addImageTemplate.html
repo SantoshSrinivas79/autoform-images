@@ -1,20 +1,12 @@
+<!-- <div class="filedrag" style="background:#EEE;">or drop files here</div> -->
 <template name="addImageTemplate">
-  Select files <input class="image-file-button form-control" id="image-file" type="file" {{atts}} multiple />
-  <div class="filedrag" style="background:#EEE;">or drop files here</div>
-
+  Select files <input class="image-file-button form-control" id="image-file" type="file" {{this.atts}} />
+  <img src={{url}} class="thumbnail" style="width:200px;"/>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+      <span class="sr-only">{{progress}}% Complete</span>
+    </div>
+  </div>
   <!-- <button type="button" class="btn btn-primary">Select an image</button> -->
   <!-- <input type="text" value="" {{atts}}/> -->
-  <ul class="filesList">
-  </ul>
-</template>
-
-<template name="uploadItem">
-  <li class="uploadItem">
-    <img src={{url}} class="thumbnail" style="width:200px;"/>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
-        <span class="sr-only">{{progress}}% Complete</span>
-      </div>
-    </div>
-  </li>
 </template>
