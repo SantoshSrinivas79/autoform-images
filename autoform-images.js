@@ -27,6 +27,7 @@ Template.addImageElemTemplate.events({
       Template.instance().uploader.send(event.target.files[0], function (error, downloadUrl) {
         if (error) {
           console.log(error);
+          fileUrl.set("");
           // Log service detailed response.
           // console.error('Error uploading', uploader.xhr.response);
           // alert (error);
@@ -37,6 +38,8 @@ Template.addImageElemTemplate.events({
           // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
         }
       });
+    } else {
+      fileUrl.set("");
     }
   }
 });
