@@ -17,7 +17,12 @@ Template.addImageElemTemplate.onCreated(function(){
 });
 
 Template.addImageElemTemplate.onDestroyed(function(){
-// TODO delete image on remote here
+  if(fileUrl.get() !== "") {
+    const deletePath = fileUrl.get().slice(fileUrl.get().indexOf('.com') + '.com'.length)
+    S3.delete(deletePath, (err,res) => {
+      console.log(err,res);
+    });
+  }
 });
 
 Template.addImageElemTemplate.events({

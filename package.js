@@ -16,13 +16,14 @@ Package.onUse(function(api) {
   api.use('templating@1.2.15');
   api.use('edgee:slingshot@0.7.1');
   api.use('aldeed:autoform@5.8.1');
+  api.use('lepozepo:s3@4.1.3');
   // api.mainModule('autoform-images.js');
   // api.addAssets(['addImageTemplate.html'], 'client');
   api.addFiles([
     'addImageTemplate.html','autoform-images.js',
   ], 'client');
-  api.addFiles(['SlingshotConfig.js'],['client','server']);
-  api.addFiles(['SlingshotDirective.js'],['server']);
+  api.addFiles(['SlingshotConfig.js','S3Methods.js'],['client','server']);
+  api.addFiles(['SlingshotDirective.js','S3Config.js'],['server']);
 });
 
 Package.onTest(function(api) {
