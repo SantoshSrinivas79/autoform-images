@@ -5,24 +5,9 @@ import { Meteor } from 'meteor/meteor';
 let fileUrl = "";
 let filePicked = new ReactiveVar(false);
 
-AutoForm.addInputType('afImageParent', {
-  template:'addImageParentTemplate',
-  valueOut(){
-    // TODO
-    // console.log(imageURL.get());
-    // return imageURL.get();
-    console.log(fileUrl);
-    return fileUrl;
-  },
-});
-
 AutoForm.addInputType('afImageElem', {
   template:'addImageElemTemplate',
   valueOut(){
-    // TODO
-    // console.log(imageURL.get());
-    // return imageURL.get();
-    console.log(fileUrl);
     return fileUrl;
   },
 });
