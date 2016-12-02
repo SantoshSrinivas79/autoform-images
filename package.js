@@ -22,13 +22,21 @@ Package.onUse(function(api) {
   api.addFiles([
     'addImageTemplate.html','autoform-images.js',
   ], 'client');
-  api.addFiles(['SlingshotConfig.js','S3Methods.js'],['client','server']);
+  api.addFiles(['SlingshotConfig.js'],['client','server']);
   api.addFiles(['SlingshotDirective.js','S3Config.js'],['server']);
 });
 
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
+  api.use('practicalmeteor:mocha');
+  api.use('practicalmeteor:chai');
   api.use('maxjohansen:autoform-images');
-  api.mainModule('autoform-images-tests.js');
+  api.use('edgee:slingshot@0.7.1');
+  api.use('lepozepo:s3@5.2.4');
+  api.use('aldeed:autoform@5.8.1');
+  // api.mainModule('autoform-images-server-tests.js','server');
+  api.addFiles('autoform-images-shared-tests.js',['server','client']);
+  api.addFiles('autoform-images-server-tests.js','server');
+  api.addFiles('autoform-images-client-tests.js','client');
 });
