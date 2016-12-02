@@ -4,8 +4,8 @@ import { Meteor } from 'meteor/meteor';
 
 let fileUrl = "";
 
-AutoForm.addInputType('afImage', {
-  template:'addImageTemplate',
+AutoForm.addInputType('afImageParent', {
+  template:'addImageParentTemplate',
   valueOut(){
     // TODO
     // console.log(imageURL.get());
@@ -15,11 +15,26 @@ AutoForm.addInputType('afImage', {
   },
 });
 
-Template.addImageTemplate.onCreated(function(){
+AutoForm.addInputType('afImageElem', {
+  template:'addImageElemTemplate',
+  valueOut(){
+    // TODO
+    // console.log(imageURL.get());
+    // return imageURL.get();
+    console.log(fileUrl);
+    return fileUrl;
+  },
+});
+
+Template.addImageElemTemplate.onCreated(function(){
   this.uploader = new Slingshot.Upload("myFileUploads");
 });
 
-Template.addImageTemplate.events({
+Template.addImageElemTemplate.onDestroyed(function(){
+// TODO delete image on remote here
+});
+
+Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
     Template.instance().uploader.send(event.target.files[0], function (error, downloadUrl) {
       if (error) {
@@ -37,7 +52,7 @@ Template.addImageTemplate.events({
   }
 });
 
-Template.addImageTemplate.helpers({
+Template.addImageElemTemplate.helpers({
   progress: function () {
     return Math.round(Template.instance().uploader.progress() * 100);
   },
