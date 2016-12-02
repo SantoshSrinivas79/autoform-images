@@ -2,13 +2,13 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 
-let fileUrl = "";
+let fileUrl = new ReactiveVar("");
 let filePicked = new ReactiveVar(false);
 
 AutoForm.addInputType('afImageElem', {
   template:'addImageElemTemplate',
   valueOut(){
-    return fileUrl;
+    return fileUrl.get();
   },
 });
 
@@ -32,7 +32,7 @@ Template.addImageElemTemplate.events({
           // alert (error);
         }
         else {
-          fileUrl = downloadUrl;
+          fileUrl.set(downloadUrl);
           // imageURL.set(downloadUrl);
           // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
         }
