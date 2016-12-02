@@ -30,5 +30,5 @@ Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
   api.use('maxjohansen:autoform-images');
-  // api.mainModule('autoform-images-tests.js');
+  api.mainModule('autoform-images-tests.js');
 });
