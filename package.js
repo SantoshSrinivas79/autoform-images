@@ -16,7 +16,7 @@ Package.onUse(function(api) {
   api.use('templating@1.2.15');
   api.use('edgee:slingshot@0.7.1');
   api.use('aldeed:autoform@5.8.1');
-  api.use('lepozepo:s3@4.1.3');
+  api.use('lepozepo:s3@5.2.4');
   // api.mainModule('autoform-images.js');
   // api.addAssets(['addImageTemplate.html'], 'client');
   api.addFiles([
