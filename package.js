@@ -11,7 +11,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.4.2.1');
+  api.versionsFrom('1.4.2.3');
   api.use('ecmascript');
   api.use('templating@1.2.15');
   api.use('edgee:slingshot@0.7.1');
@@ -27,6 +27,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
+  api.versionsFrom('1.4.2.3');
   api.use('ecmascript');
   api.use('tinytest');
   api.use('practicalmeteor:mocha');
