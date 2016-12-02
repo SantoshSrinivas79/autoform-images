@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 
 let fileUrl = "";
+let filePicked = new ReactiveVar(false);
 
 AutoForm.addInputType('afImageParent', {
   template:'addImageParentTemplate',
@@ -36,19 +37,22 @@ Template.addImageElemTemplate.onDestroyed(function(){
 
 Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
-    Template.instance().uploader.send(event.target.files[0], function (error, downloadUrl) {
-      if (error) {
-        console.log(error);
-        // Log service detailed response.
-        // console.error('Error uploading', uploader.xhr.response);
-        // alert (error);
-      }
-      else {
-        fileUrl = downloadUrl;
-        // imageURL.set(downloadUrl);
-        // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
-      }
-    });
+    filePicked.set(event.target.files.length !== 0);
+    if(filePicked.get()){
+      Template.instance().uploader.send(event.target.files[0], function (error, downloadUrl) {
+        if (error) {
+          console.log(error);
+          // Log service detailed response.
+          // console.error('Error uploading', uploader.xhr.response);
+          // alert (error);
+        }
+        else {
+          fileUrl = downloadUrl;
+          // imageURL.set(downloadUrl);
+          // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
+        }
+      });
+    }
   }
 });
 
@@ -60,4 +64,7 @@ Template.addImageElemTemplate.helpers({
     // TODO fix weird slash bug
     return Template.instance().uploader.url(true);
   },
+  filePicked: function(){
+    return filePicked.get();
+  }
 });
