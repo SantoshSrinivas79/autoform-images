@@ -1,8 +1,8 @@
-language: node_js
 sudo: required
+language: node_js
 node_js:
   - "0.12"
 before_install:
-  - "curl -L https://install.meteor.com/ | /bin/sh"
-before_script:
-  - "export PATH=$HOME/.meteor:$PATH"
+  - "curl -L http://git.io/ejPSng | /bin/sh"
+env:
+  - TEST_COMMAND=meteor
