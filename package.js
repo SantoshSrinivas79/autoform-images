@@ -1,6 +1,6 @@
 Package.describe({
   name: 'maxjohansen:autoform-images',
-  version: '0.0.3',
+  version: '0.0.4',
   // Brief, one-line summary of the package.
   summary: 'Image upload for Autoform',
   // URL to the Git repository containing the source code for this package.
