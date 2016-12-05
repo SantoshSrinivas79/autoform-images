@@ -18,10 +18,11 @@ Template.addImageElemTemplate.onCreated(function(){
 
 Template.addImageElemTemplate.onDestroyed(function(){
   if(fileUrl.get() !== "") {
-    const deletePath = fileUrl.get().slice(fileUrl.get().indexOf('.com') + '.com'.length)
-    S3.delete(deletePath, (err,res) => {
-      console.log(err,res);
-    });
+    // TODO fix image cleanup
+    // const deletePath = fileUrl.get().slice(fileUrl.get().indexOf('.com') + '.com'.length)
+    // S3.delete(deletePath, (err,res) => {
+    //   console.log(err,res);
+    // });
   }
 });
 
