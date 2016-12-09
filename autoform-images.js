@@ -3,7 +3,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 
 let fileUrl = new ReactiveVar("");
-let filePicked = new ReactiveVar(false);
 
 AutoForm.addInputType('afImageElem', {
   template:'addImageElemTemplate',
@@ -28,8 +27,7 @@ Template.addImageElemTemplate.onDestroyed(function(){
 
 Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
-    filePicked.set(event.target.files.length !== 0);
-    if(filePicked.get()){
+    if(event.target.files.length !== 0){
       Template.instance().uploader.send(event.target.files[0], function (error, downloadUrl) {
         if (error) {
           console.log(error);
@@ -55,12 +53,12 @@ Template.addImageElemTemplate.helpers({
     return Math.round(Template.instance().uploader.progress() * 100);
   },
   url: function(){
-    if(!filePicked.get() && Template.instance().data.value){
+    if(isNaN(Template.instance().uploader.progress()) && Template.instance().data.value){
       return Template.instance().data.value;
     }
     return Template.instance().uploader.url(true);
   },
   shouldShowProgress: function(){
-    return filePicked.get();
+    return !isNaN(Template.instance().uploader.progress());
   },
 });
