@@ -55,10 +55,12 @@ Template.addImageElemTemplate.helpers({
     return Math.round(Template.instance().uploader.progress() * 100);
   },
   url: function(){
-    // TODO fix weird slash bug
+    if(!filePicked.get() && Template.instance().data.value){
+      return Template.instance().data.value;
+    }
     return Template.instance().uploader.url(true);
   },
-  filePicked: function(){
+  shouldShowProgress: function(){
     return filePicked.get();
-  }
+  },
 });
