@@ -1,6 +1,6 @@
 Package.describe({
   name: 'maxjohansen:autoform-images',
-  version: '0.0.10',
+  version: '0.0.12',
   // Brief, one-line summary of the package.
   summary: 'Image upload for Autoform',
   // URL to the Git repository containing the source code for this package.
@@ -17,13 +17,15 @@ Package.onUse(function(api) {
   api.use('edgee:slingshot@0.7.1');
   api.use('aldeed:autoform@5.8.1');
   api.use('lepozepo:s3@5.2.4');
-  // api.mainModule('autoform-images.js');
   // api.addAssets(['addImageTemplate.html'], 'client');
   api.addFiles([
-    'addImageTemplate.html','autoform-images.js',
+    'addImageTemplate.html',
   ], 'client');
   api.addFiles(['SlingshotConfig.js','S3Methods.js'],['client','server']);
   api.addFiles(['SlingshotDirective.js','S3Config.js'],['server']);
+
+  api.mainModule('autoform-images.js', 'client');
+
 });
 
 Package.onTest(function(api) {
