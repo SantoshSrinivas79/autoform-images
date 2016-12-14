@@ -4,21 +4,14 @@ import { Meteor } from 'meteor/meteor';
 
 export const fileUrlMap = {};
 
+const fileUrlArr = [];
+
 const interation = 0;
 
 AutoForm.addInputType('afImageElem', {
   template:'addImageElemTemplate',
   valueOut(){
-    console.log(AutoForm.getCurrentDataForForm());
-    if (!fileUrlMap[this.context.id]) {
-      console.log('failing on id: ' + this.context.id);
-      console.log(fileUrlMap);
-      console.log(this);
-      console.log(this.val());
-      return '';
-    } else {
-      return fileUrlMap[this.context.id].get();
-    }
+    return fileUrlMap[this.attr('data-schema-key')].get();
   }
 });
 
@@ -26,10 +19,10 @@ AutoForm.addInputType('afImageElem', {
 Template.addImageElemTemplate.onCreated(function(){
   this.uploader = new Slingshot.Upload("myFileUploads");
 
-  fileUrlMap[this.data.atts.id] = new ReactiveVar(Template.instance().data.value || '');
+  fileUrlMap[this.data.name] = new ReactiveVar(Template.instance().data.value || '');
 
   this.fileUrl = () => {
-    return fileUrlMap[this.data.atts.id];
+    return fileUrlMap[this.data.name];
   }
 });
 
