@@ -2,11 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 
-export const fileUrlMap = {};
-
-const fileUrlArr = [];
-
-const interation = 0;
+const fileUrlMap = {};
 
 AutoForm.addInputType('afImageElem', {
   template:'addImageElemTemplate',
@@ -47,13 +43,14 @@ Template.addImageElemTemplate.events({
 
     const templateInstance = Template.instance();
 
+
     if(event.target.files.length !== 0){
       templateInstance.uploader.send(event.target.files[0], function (error, downloadUrl) {
         if (error) {
           console.log(error);
           templateInstance.fileUrl().set("");
           // Log service detailed response.
-          // console.error('Error uploading', uploader.xhr.response);
+          console.error('Error uploading', templateInstance.uploader.xhr.response);
           // alert (error);
         }
         else {
