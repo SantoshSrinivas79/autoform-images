@@ -2,9 +2,12 @@
 <template name="addImageElemTemplate">
     <div >
     </div>
-      Select files <input class="image-file-button form-control" type="file" {{this.atts}} />
+      <input class="image-file-button form-control hidden" type="file" {{this.atts}} />
+      <a class="btn btn-success btn-block"><i class="fa fa-file-photo-o"></i> Select Image</a>
+      <div style="margin-top: 5px">
+      </div>
       {{#if url}}
-        <img src={{url}} class="thumbnail" style="width:200px;"/>
+        <img src={{url}} class="thumbnail center-block" style="width:200px;"/>
       {{/if}}
       {{#if shouldShowProgress}}
         <div class="progress">

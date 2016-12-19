@@ -62,6 +62,9 @@ Template.addImageElemTemplate.events({
     } else {
       templateInstance.fileUrl().set("");
     }
+  },
+  'click a'(event, target){
+    $('.image-file-button').click();
   }
 });
 
