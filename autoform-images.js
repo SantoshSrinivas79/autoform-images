@@ -63,7 +63,7 @@ Template.addImageElemTemplate.events({
       templateInstance.fileUrl().set("");
     }
   },
-  'click a'(event, target){
+  'click #select-button'(event, target){
     $('.image-file-button').click();
   }
 });
@@ -83,5 +83,5 @@ Template.addImageElemTemplate.helpers({
   },
   getAtts() {
     return this.atts;
-  }
+  },
 });

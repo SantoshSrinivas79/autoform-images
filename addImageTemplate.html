@@ -3,10 +3,18 @@
     <div >
     </div>
       <input class="image-file-button form-control hidden" type="file" {{this.atts}} />
-      <a class="btn btn-success btn-block"><i class="fa fa-file-photo-o"></i> Select Image</a>
+      {{#unless url}}
+        <div id="select-button" class="text-center" style="border: 2px dashed; min-height: 200px; border-radius: 5px;">
+          <br />
+          <br />
+          <i class="fa fa-3x fa-file-photo-o"></i>
+          <h4>Touch here to upload an image of your medical card</h4>
+        </div>
+      {{/unless}}
       <div style="margin-top: 5px">
       </div>
       {{#if url}}
+        <a class="btn btn-block btn-info" style="margin-bottom: 5px;">Change Image</a>
         <img src={{url}} class="img-responsive thumbnail center-block"/>
       {{/if}}
       {{#if shouldShowProgress}}
@@ -16,6 +24,7 @@
           </div>
         </div>
       {{/if}}
+
       <!-- <button type="button" class="btn btn-primary">Select an image</button> -->
       <!-- <input type="text" value="" {{atts}}/> -->
 </template>
