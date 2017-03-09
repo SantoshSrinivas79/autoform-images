@@ -1,5 +1,5 @@
 Slingshot.createDirective("myFileUploads", Slingshot.S3Storage, {
-  bucket: Meteor.settings.AWSBucket,
+  bucket: Meteor.settings.AWSBucket || process.env.AWSBucket,
 
   acl: "public-read",
 
