@@ -6,9 +6,9 @@ node_js:
 before_install:
   - "curl -L https://git.io/ejPSng | /bin/sh"
 
-env: TEST_COMMAND=./travis.sh
 env:
   - CXX=g++-4.8
+  - TEST_COMMAND=./travis.sh
 addons:
   apt:
     sources:
