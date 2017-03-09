@@ -1,5 +1,8 @@
 # Getting this plugin to draw croppie
 
+## Load package
+Make sure you've cloned the repo from github and symlinked to your `/packages` directory. Also, make sure you're on the right branch.
+
 ## Install croppie
 In your top-level app directory (~/projects/oji):
 ```bash
