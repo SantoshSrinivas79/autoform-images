@@ -1,6 +1,10 @@
 Slingshot.createDirective("myFileUploads", Slingshot.S3Storage, {
   bucket: Meteor.settings.AWSBucket || process.env.AWSBucket,
-
+  
+  "AWSAccessKeyId":Meteor.settings.AWSAccessKeyId || process.env.AWSAccessKeyId,
+  "AWSSecretAccessKey":Meteor.settings.AWSSecretAccessKey || process.env.AWSSecretAccessKey,
+  "region":Meteor.settings.AWSRegion || process.env.AWSRegion,
+  
   acl: "public-read",
 
   authorize: function () {
