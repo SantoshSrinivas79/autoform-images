@@ -8,7 +8,7 @@ const logging = false;
 let log = () => "";
 
 if(logging)
-    log = console.log;
+    log = log;
 
 checkNpmVersions({
     'croppie':'2.4.1'
@@ -39,14 +39,14 @@ Template.addImageElemTemplate.onCreated(function(){
   this.reader = new FileReader();
   this.reader.addEventListener("load", () => {
       this.uploader = null;
-      console.log('creating new uploader');
+      log('creating new uploader');
       this.uploader = new Slingshot.Upload("myFileUploads");
-      console.log('binding new croppie');
+      log('binding new croppie');
       this.croppieEl.bind({
           url:this.reader.result,
       });
       this.croppieExists.set(true);
-      console.log('new croppie bound');
+      log('new croppie bound');
   });
 });
 
@@ -61,7 +61,7 @@ Template.addImageElemTemplate.onDestroyed(function(){
     // TODO fix image cleanup
     // const deletePath = fileUrl.get().slice(fileUrl.get().indexOf('.com') + '.com'.length)
     // S3.delete(deletePath, (err,res) => {
-    //   console.log(err,res);
+    //   log(err,res);
     // });
   // }
 });
@@ -71,7 +71,7 @@ Template.addImageElemTemplate.events({
     Template.instance().fileUrl().set("");
     if(event.target.files.length !== 0){
       Template.instance().filename = event.target.files[0].name;
-      console.log('creating new croppie');
+      log('creating new croppie');
       Template.instance().croppieEl = new Croppie(document.getElementById(Template.instance().croppieId), {
         viewport: {
             width: 200,
@@ -82,7 +82,7 @@ Template.addImageElemTemplate.events({
             height:300,
         }
       });
-      console.log('new croppie created');
+      log('new croppie created');
       Template.instance().reader.readAsDataURL(event.target.files[0]);
     }
   },
@@ -91,35 +91,35 @@ Template.addImageElemTemplate.events({
   },
   'click .cropButton'(event, target){
       const templateInstance = Template.instance();
-      console.log('uploading croppie data');
+      log('uploading croppie data');
       Template.instance().croppieEl.result({
         type:'blob',
       }).then((imageFile) => {
-          console.log('obtained croppie blob');
+          log('obtained croppie blob');
           imageFile.name = templateInstance.filename;
           templateInstance.croppieEl.destroy();
           templateInstance.croppieEl = null;
           templateInstance.croppieExists.set(false);
-          console.log('croppie destroyed', templateInstance.croppieEl);
+          log('croppie destroyed', templateInstance.croppieEl);
           templateInstance.uploader.send(imageFile, function (error, downloadUrl) {
             if (error) {
-              console.log(error);
+              log(error);
               templateInstance.fileUrl().set("");
               // Log service detailed response.
               console.error('Error uploading', templateInstance.uploader.xhr.response);
               // alert (error);
             }
             else {
-              console.log('setting new download url', downloadUrl);
+              log('setting new download url', downloadUrl);
               templateInstance.fileUrl().set(downloadUrl);
-              console.log(templateInstance.uploader.dataUri);
-              console.log('current uploader url', templateInstance.uploader.url(true));
+              log(templateInstance.uploader.dataUri);
+              log('current uploader url', templateInstance.uploader.url(true));
               // imageURL.set(downloadUrl);
               // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
             }
           });
       }).catch((err) => {
-         console.log('err getting croppie blob', err);  
+         log('err getting croppie blob', err);  
       });
   }
 });
