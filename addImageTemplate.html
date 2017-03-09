@@ -6,6 +6,12 @@
       <a class="btn btn-success btn-block"><i class="fa fa-file-photo-o"></i> Select Image</a>
       <div style="margin-top: 5px">
       </div>
+      <div id="{{croppieId}}">
+          <!-- croppie container -->
+      </div>
+      {{#if croppieExists}}
+        <button class="cropButton">Crop</button>
+      {{/if}}
       {{#if url}}
         <img src={{url}} class="img-responsive thumbnail center-block"/>
       {{/if}}

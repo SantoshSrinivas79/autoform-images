@@ -4,10 +4,10 @@ import { Meteor } from 'meteor/meteor';
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
 checkNpmVersions({
-    'jquery-cropbox':'0.1.x'
+    'croppie':'2.4.1'
 },'maxjohansen:autoform-images');
-
-const Cropbox = require('jquery-cropbox');
+require('croppie/croppie.css');
+const Croppie = require('croppie');
 
 const fileUrlMap = {};
 
@@ -27,6 +27,15 @@ Template.addImageElemTemplate.onCreated(function(){
   this.fileUrl = () => {
     return fileUrlMap[this.data.name];
   }
+  this.croppieExists = new ReactiveVar(false);
+  this.croppieId = this.data.name.replace(".","-"); 
+  this.reader = new FileReader();
+  this.reader.addEventListener("load", () => {
+      this.croppieEl.bind({
+          url:this.reader.result,
+      });
+      this.croppieExists.set(true);
+  });
 });
 
 // Template.addImageElemTemplate.onRendered(function() {
@@ -48,30 +57,38 @@ Template.addImageElemTemplate.onDestroyed(function(){
 Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
 
-    const templateInstance = Template.instance();
-
-
     if(event.target.files.length !== 0){
-      templateInstance.uploader.send(event.target.files[0], function (error, downloadUrl) {
-        if (error) {
-          console.log(error);
-          templateInstance.fileUrl().set("");
-          // Log service detailed response.
-          console.error('Error uploading', templateInstance.uploader.xhr.response);
-          // alert (error);
-        }
-        else {
-          templateInstance.fileUrl().set(downloadUrl);
-          // imageURL.set(downloadUrl);
-          // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
-        }
-      });
+      Template.instance().croppieEl = new Croppie(document.getElementById(Template.instance().croppieId), {}); 
+      Template.instance().reader.readAsDataURL(event.target.files[0]);
     } else {
-      templateInstance.fileUrl().set("");
+      Template.instance().fileUrl().set("");
     }
   },
   'click a'(event, target){
     $('.image-file-button').click();
+  },
+  'click .cropButton'(event, target){
+      const templateInstance = Template.instance();
+      Template.instance().croppieEl.result({
+        type:'blob',
+      }).then((imageFile) => {    
+          templateInstance.uploader.send(imageFile, function (error, downloadUrl) {
+            if (error) {
+              console.log(error);
+              templateInstance.fileUrl().set("");
+              // Log service detailed response.
+              console.error('Error uploading', templateInstance.uploader.xhr.response);
+              // alert (error);
+            }
+            else {
+              templateInstance.fileUrl().set(downloadUrl);
+              // imageURL.set(downloadUrl);
+              // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
+            }
+            templateInstance.croppieEl.destroy();
+            templateInstance.croppieExists.set(false);
+          });
+      });
   }
 });
 
@@ -90,5 +107,11 @@ Template.addImageElemTemplate.helpers({
   },
   getAtts() {
     return this.atts;
-  }
+  },
+  croppieId() {
+    return Template.instance().croppieId;
+  },
+  croppieExists() {
+    return Template.instance().croppieExists.get();
+  },
 });
