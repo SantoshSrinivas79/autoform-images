@@ -5,7 +5,7 @@ import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
 const logging = false;
 
-const log = () => return;
+let log = () => "";
 
 if(logging)
     log = console.log;
