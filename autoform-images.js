@@ -31,10 +31,15 @@ Template.addImageElemTemplate.onCreated(function(){
   this.croppieId = this.data.name.replace(".","-");
   this.reader = new FileReader();
   this.reader.addEventListener("load", () => {
+      this.uploader = null;
+      console.log('creating new uploader');
+      this.uploader = new Slingshot.Upload("myFileUploads");
+      console.log('binding new croppie');
       this.croppieEl.bind({
           url:this.reader.result,
       });
       this.croppieExists.set(true);
+      console.log('new croppie bound');
   });
 });
 
@@ -56,8 +61,10 @@ Template.addImageElemTemplate.onDestroyed(function(){
 
 Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
-
+    Template.instance().fileUrl().set("");
     if(event.target.files.length !== 0){
+      Template.instance().filename = event.target.files[0].name;
+      console.log('creating new croppie');
       Template.instance().croppieEl = new Croppie(document.getElementById(Template.instance().croppieId), {
         viewport: {
             width: 200,
@@ -68,9 +75,8 @@ Template.addImageElemTemplate.events({
             height:300,
         }
       });
+      console.log('new croppie created');
       Template.instance().reader.readAsDataURL(event.target.files[0]);
-    } else {
-      Template.instance().fileUrl().set("");
     }
   },
   'click a'(event, target){
@@ -78,9 +84,16 @@ Template.addImageElemTemplate.events({
   },
   'click .cropButton'(event, target){
       const templateInstance = Template.instance();
+      console.log('uploading croppie data');
       Template.instance().croppieEl.result({
         type:'blob',
       }).then((imageFile) => {
+          console.log('obtained croppie blob');
+          imageFile.name = templateInstance.filename;
+          templateInstance.croppieEl.destroy();
+          templateInstance.croppieEl = null;
+          templateInstance.croppieExists.set(false);
+          console.log('croppie destroyed', templateInstance.croppieEl);
           templateInstance.uploader.send(imageFile, function (error, downloadUrl) {
             if (error) {
               console.log(error);
@@ -90,13 +103,16 @@ Template.addImageElemTemplate.events({
               // alert (error);
             }
             else {
+              console.log('setting new download url', downloadUrl);
               templateInstance.fileUrl().set(downloadUrl);
+              console.log(templateInstance.uploader.dataUri);
+              console.log('current uploader url', templateInstance.uploader.url(true));
               // imageURL.set(downloadUrl);
               // Meteor.users.update(Meteor.userId(), {$push: {"profile.files": downloadUrl}});
             }
-            templateInstance.croppieEl.destroy();
-            templateInstance.croppieExists.set(false);
           });
+      }).catch((err) => {
+         console.log('err getting croppie blob', err);  
       });
   }
 });
@@ -106,9 +122,6 @@ Template.addImageElemTemplate.helpers({
     return Math.round(Template.instance().uploader.progress() * 100);
   },
   url: function(){
-    if(isNaN(Template.instance().uploader.progress()) && Template.instance().data.value){
-      return Template.instance().data.value;
-    }
     return Template.instance().uploader.url(true);
   },
   shouldShowProgress: function(){
