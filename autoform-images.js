@@ -58,7 +58,16 @@ Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
 
     if(event.target.files.length !== 0){
-      Template.instance().croppieEl = new Croppie(document.getElementById(Template.instance().croppieId), {}); 
+      Template.instance().croppieEl = new Croppie(document.getElementById(Template.instance().croppieId), {
+        viewport: {
+            width: 200,
+            height: 200,
+        },
+        boundary: {
+            width:300,
+            height:300,
+        }
+      }); 
       Template.instance().reader.readAsDataURL(event.target.files[0]);
     } else {
       Template.instance().fileUrl().set("");
