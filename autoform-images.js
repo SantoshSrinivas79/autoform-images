@@ -1,6 +1,13 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
+import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
+
+checkNpmVersions({
+    'jquery-cropbox':'0.1.x'
+},'maxjohansen:autoform-images');
+
+const Cropbox = require('jquery-cropbox');
 
 const fileUrlMap = {};
 
