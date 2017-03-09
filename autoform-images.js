@@ -122,7 +122,10 @@ Template.addImageElemTemplate.helpers({
     return Math.round(Template.instance().uploader.progress() * 100);
   },
   url: function(){
-    return Template.instance().uploader.url(true);
+    if(Template.instance().fileUrl().get() === ""){
+        return Template.instance().uploader.url(true);
+    }
+    return Template.instance().fileUrl().get();
   },
   shouldShowProgress: function(){
     return !isNaN(Template.instance().uploader.progress());
