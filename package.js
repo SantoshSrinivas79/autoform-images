@@ -1,6 +1,3 @@
-Npm.depends({
-  'phantomjs-prebuilt':'2.1.14',
-});
 Package.describe({
   name: 'maxjohansen:autoform-images',
   version: '0.0.16',
@@ -33,5 +30,5 @@ Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('dispatch:mocha');
   api.use('maxjohansen:autoform-images');
-  api.addFiles('autoform-images-tests.js');
+  //api.addFiles('autoform-images-tests.js');
 });
