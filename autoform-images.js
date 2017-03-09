@@ -74,7 +74,7 @@ Template.addImageElemTemplate.events({
     }
   },
   'click a'(event, target){
-    $('.upload-' + this.atts['data-schema-key']).click();
+    $('.upload-' + Template.instance().croppieId).click();
   },
   'click .cropButton'(event, target){
       const templateInstance = Template.instance();
@@ -123,7 +123,4 @@ Template.addImageElemTemplate.helpers({
   croppieExists() {
     return Template.instance().croppieExists.get();
   },
-  fieldId() {
-    return this.atts['data-schema-key'];
-  }
 });
