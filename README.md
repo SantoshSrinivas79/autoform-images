@@ -68,6 +68,14 @@ Dogs.simpleSchema.addAutoFormOptions({
 
 Now, just render an autoform somewhere that uses this schema.
 
+## Development
+To test the latest version, clone the package from github.
+```bash
+git clone git@github.com:macsj200/autoform-images.git
+```
+
+Then, put the `autoform-images` folder inside your app's top-level `packages` directory. You can also symlink the folder in (`cd packages; ln -s /path/to/autoform-images .`). Make sure you've checked out the relevant branch.
+
 ## Todos
 ### Testing
 ### Clean up UI
