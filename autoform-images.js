@@ -28,7 +28,7 @@ Template.addImageElemTemplate.onCreated(function(){
     return fileUrlMap[this.data.name];
   }
   this.croppieExists = new ReactiveVar(false);
-  this.croppieId = this.data.name.replace(".","-"); 
+  this.croppieId = this.data.name.replace(".","-");
   this.reader = new FileReader();
   this.reader.addEventListener("load", () => {
       this.croppieEl.bind({
@@ -67,20 +67,20 @@ Template.addImageElemTemplate.events({
             width:300,
             height:300,
         }
-      }); 
+      });
       Template.instance().reader.readAsDataURL(event.target.files[0]);
     } else {
       Template.instance().fileUrl().set("");
     }
   },
   'click a'(event, target){
-    $('.image-file-button').click();
+    $('.upload-' + this.atts['data-schema-key']).click();
   },
   'click .cropButton'(event, target){
       const templateInstance = Template.instance();
       Template.instance().croppieEl.result({
         type:'blob',
-      }).then((imageFile) => {    
+      }).then((imageFile) => {
           templateInstance.uploader.send(imageFile, function (error, downloadUrl) {
             if (error) {
               console.log(error);
@@ -123,4 +123,7 @@ Template.addImageElemTemplate.helpers({
   croppieExists() {
     return Template.instance().croppieExists.get();
   },
+  fieldId() {
+    return this.atts['data-schema-key'];
+  }
 });
