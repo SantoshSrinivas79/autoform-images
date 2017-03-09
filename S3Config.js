@@ -1,4 +1,3 @@
-console.log(process.env);
 S3.config = {
   key: Meteor.settings.AWSAccessKeyId || process.env.AWSAccessKeyId,
   secret: Meteor.settings.AWSSecretAccessKey || process.env.AWSSecretAccessKey,
