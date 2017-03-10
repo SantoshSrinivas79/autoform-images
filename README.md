@@ -85,8 +85,6 @@ Then, put the `autoform-images` folder inside your app's top-level `packages` di
 
 
 ## Bugs
-### Croppie UI should disappear after crop pressed
-(It shouldn't wait for the upload to finish)
 
 ### iOS rotation metadata handling
 We should probably just read the metadata, re-orient the image, then strip the metadata back out.
