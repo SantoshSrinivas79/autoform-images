@@ -121,6 +121,7 @@ Template.addImageElemTemplate.events({
       }).catch((err) => {
          log('err getting croppie blob', err);  
       });
+      return false;
   }
 });
 
