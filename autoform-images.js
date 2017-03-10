@@ -85,9 +85,11 @@ Template.addImageElemTemplate.events({
       log('new croppie created');
       Template.instance().reader.readAsDataURL(event.target.files[0]);
     }
+    return false;
   },
   'click a'(event, target){
     $('.upload-' + Template.instance().croppieId).click();
+    return false;
   },
   'click .cropButton'(event, target){
       const templateInstance = Template.instance();
