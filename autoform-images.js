@@ -3,18 +3,19 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
-const logging = false;
+const logging = true;
 
 let log = () => "";
 
 if(logging)
-    log = log;
+    log = console.log;
 
+log('we are logging');
 checkNpmVersions({
     'croppie':'2.4.1'
 },'maxjohansen:autoform-images');
 require('croppie/croppie.css');
-const Croppie = require('croppie');
+Croppie = require('croppie');
 
 const fileUrlMap = {};
 
@@ -27,6 +28,7 @@ AutoForm.addInputType('afImageElem', {
 
 
 Template.addImageElemTemplate.onCreated(function(){
+  log('created template');
   this.uploader = new Slingshot.Upload("myFileUploads");
 
   fileUrlMap[this.data.name] = new ReactiveVar(Template.instance().data.value || '');
@@ -88,6 +90,7 @@ Template.addImageElemTemplate.events({
     return false;
   },
   'click a'(event, target){
+    log('clicked file selector button');
     $('.upload-' + Template.instance().croppieId).click();
     return false;
   },
