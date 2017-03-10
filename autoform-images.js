@@ -70,7 +70,7 @@ Template.addImageElemTemplate.events({
   'change .image-file-button'(event, target){
     Template.instance().fileUrl().set("");
     if(event.target.files.length !== 0){
-      Template.instance().filename = event.target.files[0].name;
+      Template.instance().filename = Date.now() + event.target.files[0].name;
       log('creating new croppie');
       Template.instance().croppieEl = new Croppie(document.getElementById(Template.instance().croppieId), {
         viewport: {
