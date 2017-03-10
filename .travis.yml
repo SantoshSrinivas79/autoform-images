@@ -6,7 +6,7 @@ before_install:
 - curl https://install.meteor.com | /bin/sh
 - export PATH="$HOME/.meteor:$PATH"
 script:
-- meteor --once test-packages ./ --driver-package practicalmeteor:mocha
+    - meteor add practicalmeteor:mocha practicalmeteor:mocha-console-runner; meteor npm i spacejam croppie; spacejam test-packages --driver-package=practicalmeteor:mocha-console-runner ./ 
 env:
   global:
     - AWSRegion="us-west-1"
