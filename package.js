@@ -30,5 +30,7 @@ Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('dispatch:mocha');
   api.use('maxjohansen:autoform-images');
+  api.addFiles('tests/server.tests.js','server');
+  api.addFiles('tests/client.tests.js','client');
   //api.addFiles('autoform-images-tests.js');
 });
