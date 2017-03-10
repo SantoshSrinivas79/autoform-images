@@ -87,16 +87,6 @@ Then, put the `autoform-images` folder inside your app's top-level `packages` di
 ## Bugs
 ### Croppie UI should disappear after crop pressed
 (It shouldn't wait for the upload to finish)
-### File name is `undefined`
-The primary issue is that we share file names across the whole bucket, and we don't want to overwrite the wrong files.  **This is likely exposing some underlying user auth/permission problems**. Meanwhile, to fix the name collision issues, we can implement some sort of hashing scheme. 
-
-- MD5
-
-    This is probably the safest route (least collision-prone). We will need to add an external dependency for computing this hash. We could use CryptoJS, but that's a very large dependency to introduce for one function.
-
-- Original file name + current system time
-
-    This would likely work pretty well also.
 
 ### iOS rotation metadata handling
 We should probably just read the metadata, re-orient the image, then strip the metadata back out.
