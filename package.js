@@ -1,6 +1,6 @@
 Package.describe({
   name: 'maxjohansen:autoform-images',
-  version: '0.0.193',
+  version: '0.0.195',
   // Brief, one-line summary of the package.
   summary: 'Image upload for Autoform',
   // URL to the Git repository containing the source code for this package.
@@ -28,7 +28,19 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('ecmascript');
+  api.use('blaze');
   api.use('dispatch:mocha');
   api.use('maxjohansen:autoform-images');
+  api.use('xolvio:cleaner');
+  api.use('aldeed:collection2-core');
+  api.use('aldeed:autoform@5.8.1');
+  api.use('aldeed:simple-schema');
+  api.use('templating@1.2.15');
+  api.imply('tmeasday:check-npm-versions');
+  api.addAssets('tests/maintenance.jpg', 'client');
+  api.addFiles('tests/dogForms.html','client');
+  api.addFiles('tests/shared.tests.js',['client','server']);
+  api.addFiles('tests/server.tests.js','server');
+  api.addFiles('tests/client.tests.js','client');
   //api.addFiles('autoform-images-tests.js');
 });

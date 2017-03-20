@@ -1,0 +1,25 @@
+{
+  "name": "autoform-images",
+  "version": "1.0.0",
+  "description": "An atmosphere package for adding image cropping and upload support to Autoform [![Build Status](https://travis-ci.org/macsj200/autoform-images.svg?branch=master)](https://travis-ci.org/macsj200/autoform-images)",
+  "main": "autoform-images.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macsj200/autoform-images.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macsj200/autoform-images/issues"
+  },
+  "homepage": "https://github.com/macsj200/autoform-images#readme",
+  "dependencies": {
+    "croppie": "^2.4.1"
+  }
+}
