@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
-const logging = true;
+const logging = false;
 
 let log = () => "";
 
