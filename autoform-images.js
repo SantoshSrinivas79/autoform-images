@@ -80,7 +80,7 @@ Template.addImageElemTemplate.events({
             height: 200,
         },
         boundary: {
-            width:300,
+            width: '100%',
             height:300,
         }
       });
@@ -124,7 +124,7 @@ Template.addImageElemTemplate.events({
             }
           });
       }).catch((err) => {
-         log('err getting croppie blob', err);  
+         log('err getting croppie blob', err);
       });
       return false;
   }
