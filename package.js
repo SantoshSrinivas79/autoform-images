@@ -1,6 +1,6 @@
 Package.describe({
   name: 'maxjohansen:autoform-images',
-  version: '0.0.195',
+  version: '0.0.196',
   // Brief, one-line summary of the package.
   summary: 'Image upload for Autoform',
   // URL to the Git repository containing the source code for this package.
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   api.use('templating@1.2.15');
   api.use('edgee:slingshot@0.7.1');
   api.use('aldeed:autoform@5.8.1');
-  api.use('lepozepo:s3@5.2.4'); 
+  api.use('lepozepo:s3@5.2.4');
   api.use('tmeasday:check-npm-versions@0.3.1');
   // api.addAssets(['addImageTemplate.html'], 'client');
   api.addFiles([
