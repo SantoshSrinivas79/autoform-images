@@ -99,6 +99,7 @@ Template.addImageElemTemplate.events({
       log('uploading croppie data');
       Template.instance().croppieEl.result({
         type:'blob',
+        format:'jpeg',
       }).then((imageFile) => {
           log('obtained croppie blob');
           imageFile.name = templateInstance.filename;
