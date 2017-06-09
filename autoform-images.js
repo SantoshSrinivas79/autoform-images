@@ -111,7 +111,7 @@ Template.addImageElemTemplate.events({
               log(error);
               templateInstance.fileUrl().set("");
               // Log service detailed response.
-              console.error('Error uploading', templateInstance.uploader.xhr.response);
+              // console.error('Error uploading', templateInstance.uploader.xhr.response);
               // alert (error);
             }
             else {
