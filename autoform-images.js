@@ -39,14 +39,37 @@ Template.addImageElemTemplate.onCreated(function(){
   this.croppieExists = new ReactiveVar(false);
   this.croppieId = this.data.name.replace(".","-");
   this.reader = new FileReader();
-  this.reader.addEventListener("load", () => {
+  this.reader.addEventListener("load", (event) => {
       this.uploader = null;
       log('creating new uploader');
       this.uploader = new Slingshot.Upload("myFileUploads");
       log('binding new croppie');
-      this.croppieEl.bind({
-          url:this.reader.result,
-      });
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      var img = new Image();
+      let croppieEl = this.croppieEl;
+      const MAX_IMAGE_SIZE = 16777216;
+      img.onload = function(){
+          // debugger;
+          if (img.width * img.height > MAX_IMAGE_SIZE) {
+            // 1/4
+            canvas.width = img.width >> 2;
+            canvas.height = img.height >> 2;
+          } else {
+            canvas.width = img.width;
+            canvas.height = img.height;
+          }
+          // canvas.width = 200;
+          // canvas.height = 200;
+          ctx.drawImage(img,0,0,canvas.width,canvas.height);
+          croppieEl.bind({
+              url:canvas.toDataURL(),
+          });
+      }
+      img.src = event.target.result;
+      // this.croppieEl.bind({
+      //     url:this.reader.result,
+      // });
       this.croppieExists.set(true);
       log('new croppie bound');
   });
