@@ -12,9 +12,11 @@ if(logging)
 
 log('we are logging');
 checkNpmVersions({
-    'croppie':'2.4.1'
+    'croppie':'2.4.1',
+    'exif-js':'2.2.1',
 },'maxjohansen:autoform-images');
 require('croppie/croppie.css');
+exifJs = require('exif-js');
 Croppie = require('croppie');
 
 const fileUrlMap = {};
