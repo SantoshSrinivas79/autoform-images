@@ -19,7 +19,5 @@
     "url": "https://github.com/macsj200/autoform-images/issues"
   },
   "homepage": "https://github.com/macsj200/autoform-images#readme",
-  "dependencies": {
-    "croppie": "^2.4.1"
-  }
+  "dependencies": {}
 }
