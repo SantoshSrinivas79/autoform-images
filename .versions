@@ -41,10 +41,10 @@ id-map@1.0.9
 jquery@1.11.10
 lepozepo:s3@5.2.5
 livedata@1.0.18
-local-test:maxjohansen:autoform-images@1.0.0
+local-test:maxjohansen:autoform-images@1.0.1
 localstorage@1.1.0
 logging@1.1.17
-maxjohansen:autoform-images@1.0.0
+maxjohansen:autoform-images@1.0.1
 meteor@1.6.1
 meteor-base@1.1.0
 minimongo@1.2.0
