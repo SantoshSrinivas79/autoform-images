@@ -14,7 +14,7 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use('templating@1.2.15');
   api.use('edgee:slingshot@0.7.1');
-  api.use('aldeed:autoform@5.8.1');
+  api.use('aldeed:autoform@5.8.1 || 6.0.0');
   api.use('lepozepo:s3@5.2.4');
   api.use('tmeasday:check-npm-versions@0.3.1');
   // api.addAssets(['addImageTemplate.html'], 'client');
